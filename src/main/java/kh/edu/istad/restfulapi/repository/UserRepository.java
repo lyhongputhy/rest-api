@@ -8,4 +8,8 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
     List<User> id(UUID id);
+
+    boolean checkById(UUID id);
+
+    void deleteOne(UUID id);
 }

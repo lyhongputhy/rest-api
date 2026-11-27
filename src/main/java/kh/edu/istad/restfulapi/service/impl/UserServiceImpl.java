@@ -21,7 +21,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final JsonMapper.Builder builder;
+
 
 
     @Override
@@ -72,8 +72,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(UUID id) {
+        // validate user ID
+        if (!userRepository.checkById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "User not found!"
+            );
+        }
 
+        userRepository.deleteOne(id);
     }
+
 
 
 }

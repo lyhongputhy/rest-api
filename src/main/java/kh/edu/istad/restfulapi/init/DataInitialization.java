@@ -1,7 +1,9 @@
 package kh.edu.istad.restfulapi.init;
 
 import jakarta.annotation.PostConstruct;
+import kh.edu.istad.restfulapi.model.Category;
 import kh.edu.istad.restfulapi.model.User;
+import kh.edu.istad.restfulapi.repository.CategoryRepository;
 import kh.edu.istad.restfulapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DataInitialization {
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
     @PostConstruct
     void init(){
@@ -39,6 +42,13 @@ public class DataInitialization {
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
+
+        }else if(categoryRepository.count() == 0){
+            Category category1 = new Category();
+            category1.setName("MIlk");
+            category1.setIcon("Cow");
+
+            categoryRepository.save(category1);
         }
 
     }
