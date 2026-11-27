@@ -43,9 +43,10 @@ public class DataInitialization {
             userRepository.save(user2);
             userRepository.save(user3);
 
-        }else if(categoryRepository.count() == 0){
+        }
+        if(categoryRepository.count() == 0){
             Category category1 = new Category();
-            category1.setName("MIlk");
+            category1.setName("Milk");
             category1.setIcon("Cow");
 
             categoryRepository.save(category1);

@@ -56,15 +56,13 @@ public class CategoryServicempl implements CategoryService {
 
     @Override
     public void deleteById(Integer id) {
-        // validate user ID
-        if (!categoryRepository.checkById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "User not found!"
-            );
-        }
-
-        categoryRepository.deleteOne(id);
+        Category category =  categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Category not found"
+                ));
+        categoryRepository.delete(category);
+        log.info("After delete user: {}",id);
     }
 
     @Override
@@ -78,7 +76,10 @@ public class CategoryServicempl implements CategoryService {
                 .orElseThrow(() -> new ResponseStatusException
                         (HttpStatus.NOT_FOUND, "Resource not found"));
     }
-
 }
+
+
+
+
 
 

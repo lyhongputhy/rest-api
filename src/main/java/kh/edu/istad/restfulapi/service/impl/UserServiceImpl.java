@@ -72,15 +72,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(UUID id) {
-        // validate user ID
-        if (!userRepository.checkById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "User not found!"
-            );
-        }
-
-        userRepository.deleteOne(id);
+      User user =  userRepository.findById(id)
+              .orElseThrow(() -> new ResponseStatusException(
+                      HttpStatus.NOT_FOUND,
+                      "User not found"
+              ));
+      userRepository.delete(user);
+      log.info("After delete user: {}",id);
     }
 
 
