@@ -36,4 +36,9 @@ public class UserController {
     public void deleteById(@PathVariable UUID id) {
         userService.deleteById(id);
     }
+
+    @GetMapping("/{id}")
+    public UserResponse getById(@PathVariable UUID id) {
+        return userService.getById(id);
+    }
 }

@@ -10,7 +10,5 @@ public interface UserService {
     UserResponse create (UserCreateRequest userCreateRequest);
     List<UserResponse> getAll();
     UserResponse getById(UUID id);
-
-
     void deleteById(UUID id);
 }
